@@ -1,19 +1,35 @@
 import React from 'react';
 
+// Router
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+
+// Context
+import CoursesContextProvider from './context/coursesContext';
+
 // Styles
 import './styles/reset.css';
 import './styles/global.css';
 
 // Components
 import Header from './components/Header';
-import Courses from './components/Courses';
+
+// Pages
+import Courses from './pages/Courses';
+import CourseDetails from './pages/CourseDetails';
 
 const App = () => {
   return (
-    <>
-      <Header />
-      <Courses />
-    </>
+    <CoursesContextProvider>
+      <Router>
+        <Header />
+        <main>
+          <Switch>
+            <Route exact path="/" component={Courses} />
+            <Route exact path="/course-details" component={CourseDetails} />
+          </Switch>
+        </main>
+      </Router>
+    </CoursesContextProvider>
   );
 };
 
