@@ -1,6 +1,7 @@
 // Courses Initial State
 export const coursesInitialState = {
-  data: [],
+  allCourses: [],
+  byId: {},
   isLoading: false,
   error: false,
 };

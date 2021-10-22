@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 // Context
-import { getAllCourses } from '../context/actions/coursesActions';
+import getAllCourses from '../context/actions/courses/getAllCourses';
 import { useGlobalContext } from '../context/Provider';
 
 const Courses = () => {
@@ -10,13 +10,13 @@ const Courses = () => {
 
   useEffect(() => {
     getAllCourses(coursesDispatch);
-  }, []);
+  }, [coursesDispatch]);
 
   return (
     <div className="wrap main--grid">
       {courses.isLoading && <p>Fetching data ...</p>}
       {!courses.isLoading &&
-        courses.data.map(course => (
+        courses.allCourses.map(course => (
           <Link className="course--module course--link" to={`/courses/${course.id}`} key={course.id}>
             <h2 className="course--label">Course</h2>
             <h3 className="course--title">{course.title}</h3>

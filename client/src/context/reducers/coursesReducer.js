@@ -8,8 +8,11 @@ const courses = (state, action) => {
     case COURSES_ACTIONS.LOADING:
       return { ...state, isLoading: true };
 
-    case COURSES_ACTIONS.SUCCESS:
-      return { ...state, isLoading: false, data: action.payload };
+    case COURSES_ACTIONS.ALL:
+      return { ...state, isLoading: false, allCourses: action.payload };
+
+    case COURSES_ACTIONS.BY_ID:
+      return { ...state, isLoading: false, byId: action.payload };
   }
 };
 
