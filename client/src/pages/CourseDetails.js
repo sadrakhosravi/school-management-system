@@ -1,9 +1,13 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
 
 // Components
 import ActionsBar from '../components/ActionsBar';
 
 const CourseDetails = () => {
+  const { id } = useParams();
+  console.log(id);
+
   return (
     <>
       <ActionsBar />

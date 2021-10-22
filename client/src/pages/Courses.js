@@ -1,21 +1,29 @@
-import React from 'react';
-import { useGetCourses } from '../context/coursesContext';
+import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
+
+// Context
+import { getAllCourses } from '../context/actions/coursesActions';
+import { useGlobalContext } from '../context/Provider';
 
 const Courses = () => {
-  const { courses, isLoading } = useGetCourses();
+  const { courses, coursesDispatch } = useGlobalContext();
+
+  useEffect(() => {
+    getAllCourses(coursesDispatch);
+  }, []);
 
   return (
     <div className="wrap main--grid">
-      {isLoading && <p>Fetching data ...</p>}
-      {!isLoading &&
-        courses.map(course => (
-          <a className="course--module course--link" href={`/courses/${course.id}`} key={course.id}>
+      {courses.isLoading && <p>Fetching data ...</p>}
+      {!courses.isLoading &&
+        courses.data.map(course => (
+          <Link className="course--module course--link" to={`/courses/${course.id}`} key={course.id}>
             <h2 className="course--label">Course</h2>
             <h3 className="course--title">{course.title}</h3>
-          </a>
+          </Link>
         ))}
 
-      <a className="course--module course--add--module" href="/courses/new">
+      <Link className="course--module course--add--module" to="/courses/new">
         <span className="course--add--title">
           <svg
             version="1.1"
@@ -29,7 +37,7 @@ const Courses = () => {
           </svg>
           New Course
         </span>
-      </a>
+      </Link>
     </div>
   );
 };

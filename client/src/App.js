@@ -4,7 +4,7 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 // Context
-import CoursesContextProvider from './context/coursesContext';
+import GlobalProvider from './context/Provider';
 
 // Styles
 import './styles/reset.css';
@@ -19,17 +19,17 @@ import CourseDetails from './pages/CourseDetails';
 
 const App = () => {
   return (
-    <CoursesContextProvider>
+    <GlobalProvider>
       <Router>
         <Header />
         <main>
           <Switch>
             <Route exact path="/" component={Courses} />
-            <Route exact path="/course-details" component={CourseDetails} />
+            <Route exact path="/courses/:id" component={CourseDetails} />
           </Switch>
         </main>
       </Router>
-    </CoursesContextProvider>
+    </GlobalProvider>
   );
 };
 

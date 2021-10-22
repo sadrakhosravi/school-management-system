@@ -1,0 +1,6 @@
+// Courses actions
+export const COURSES_ACTIONS = {
+  LOADING: 'COURSES_LOADING',
+  SUCCESS: 'COURSES_SUCCESS',
+  FAILED: 'COURSES_FAILED',
+};
