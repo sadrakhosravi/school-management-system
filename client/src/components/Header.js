@@ -11,10 +11,10 @@ const Header = () => {
         <nav>
           <ul className="header--signedout">
             <li>
-              <a href="/">Sign Up</a>
+              <Link to="/sign-up">Sign Up</Link>
             </li>
             <li>
-              <a href="/">Sign In</a>
+              <Link to="/sign-in">Sign In</Link>
             </li>
           </ul>
         </nav>
