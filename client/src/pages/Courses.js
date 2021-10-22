@@ -1,6 +1,9 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
+// Constants
+import { COURSE_NEW, COURSES } from '../utils/constants/Routes';
+
 // Context
 import getAllCourses from '../context/actions/courses/getAllCourses';
 import { useGlobalContext } from '../context/Provider';
@@ -17,13 +20,13 @@ const Courses = () => {
       {courses.isLoading && <p>Fetching data ...</p>}
       {!courses.isLoading &&
         courses.allCourses.map(course => (
-          <Link className="course--module course--link" to={`/courses/${course.id}`} key={course.id}>
+          <Link className="course--module course--link" to={`${COURSES}/${course.id}`} key={course.id}>
             <h2 className="course--label">Course</h2>
             <h3 className="course--title">{course.title}</h3>
           </Link>
         ))}
 
-      <Link className="course--module course--add--module" to="/courses/new">
+      <Link to={COURSE_NEW} className="course--module course--add--module">
         <span className="course--add--title">
           <svg
             version="1.1"

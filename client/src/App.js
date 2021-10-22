@@ -10,6 +10,9 @@ import GlobalProvider from './context/Provider';
 import './styles/reset.css';
 import './styles/global.css';
 
+// Constants
+import { COURSES, COURSE_DETAILS, COURSE_NEW, COURSE_UPDATE } from './utils/constants/Routes';
+
 // Components
 import Header from './components/Header';
 
@@ -18,6 +21,8 @@ import Courses from './pages/Courses';
 import CourseDetails from './pages/CourseDetails';
 import UserSignIn from './pages/UserSignIn';
 import UserSignUp from './pages/UserSignUp';
+import CreateCourse from './pages/CreateCourse';
+import UpdateCourse from './pages/UpdateCourse';
 
 const App = () => {
   return (
@@ -27,7 +32,9 @@ const App = () => {
         <main>
           <Switch>
             <Route exact path="/" component={Courses} />
-            <Route exact path="/courses/:id" component={CourseDetails} />
+            <Route exact path={COURSE_NEW} component={CreateCourse} />
+            <Route exact path={COURSE_UPDATE} component={UpdateCourse} />
+            <Route exact path={COURSE_DETAILS} component={CourseDetails} />
             <Route exact path="/sign-in" component={UserSignIn} />
             <Route exact path="/sign-up" component={UserSignUp} />
           </Switch>
