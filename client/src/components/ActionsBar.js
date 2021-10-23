@@ -1,11 +1,15 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+
+// Constants
+import { COURSES } from '../utils/constants/Routes';
 
 const ActionsBar = () => {
+  const { id } = useParams();
   return (
     <div className="actions--bar">
       <div className="wrap">
-        <Link className="button" href="update-course.html">
+        <Link className="button" to={`${COURSES}/${id}/update`}>
           Update Course
         </Link>
         <Link className="button" to="/">
