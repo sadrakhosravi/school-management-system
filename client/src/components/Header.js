@@ -1,10 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+
+// Context
 import { useGlobalContext } from '../context/Provider';
 
+// Hooks
+import useIsAuth from '../hooks/useIsAuth';
+
 const Header = () => {
+  const isAuth = useIsAuth();
   const { user } = useGlobalContext();
-  console.log(user);
 
   return (
     <header>
@@ -15,12 +20,12 @@ const Header = () => {
         <nav>
           <ul className="header--signedout">
             <li>
-              {user.firstName && `Welcome, ${user.firstName} ${user.lastName}`}
-              {!user.firstName && <Link to="/sign-up">Sign Up</Link>}
+              {isAuth && `Welcome, ${user.firstName} ${user.lastName}`}
+              {!isAuth && <Link to="/sign-up">Sign Up</Link>}
             </li>
             <li>
-              {user.firstName && <Link to="/sign-out">Sign Out</Link>}
-              {!user.firstName && <Link to="/sign-in">Sign In</Link>}
+              {isAuth && <Link to="/sign-out">Sign Out</Link>}
+              {!isAuth && <Link to="/sign-in">Sign In</Link>}
             </li>
           </ul>
         </nav>

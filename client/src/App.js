@@ -3,8 +3,8 @@ import React from 'react';
 // Router
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-// Context
-import GlobalProvider from './context/Provider';
+// Hooks
+import useIsAuth from './hooks/useIsAuth';
 
 // Styles
 import './styles/reset.css';
@@ -15,6 +15,7 @@ import { COURSE_DETAILS, COURSE_NEW, COURSE_UPDATE } from './utils/constants/Rou
 
 // Components
 import Header from './components/Header';
+import ProtectedRoute from './components/ProtectedRoute';
 
 // Pages
 import Courses from './pages/Courses';
@@ -26,23 +27,23 @@ import UserSignUp from './pages/UserSignUp';
 import UserSignOut from './pages/UserSignOut';
 
 const App = () => {
+  const isAuth = useIsAuth();
   return (
-    <GlobalProvider>
-      <Router>
-        <Header />
-        <main>
-          <Switch>
-            <Route exact path="/" component={Courses} />
-            <Route exact path={COURSE_NEW} component={CreateCourse} />
-            <Route exact path={COURSE_UPDATE} component={UpdateCourse} />
-            <Route exact path={COURSE_DETAILS} component={CourseDetails} />
-            <Route exact path="/sign-in" component={UserSignIn} />
-            <Route exact path="/sign-up" component={UserSignUp} />
-            <Route exact path="/sign-out" component={UserSignOut} />
-          </Switch>
-        </main>
-      </Router>
-    </GlobalProvider>
+    <Router>
+      <Header />
+      <main>
+        <Switch>
+          <Route exact path="/" component={Courses} />
+          <ProtectedRoute exact path={COURSE_NEW} component={CreateCourse} isAuth={isAuth} />
+          <ProtectedRoute exact path={COURSE_UPDATE} component={UpdateCourse} isAuth={isAuth} />
+
+          <Route exact path={COURSE_DETAILS} component={CourseDetails} />
+          <Route exact path="/sign-in" component={UserSignIn} />
+          <Route exact path="/sign-up" component={UserSignUp} />
+          <Route exact path="/sign-out" component={UserSignOut} />
+        </Switch>
+      </main>
+    </Router>
   );
 };
 
