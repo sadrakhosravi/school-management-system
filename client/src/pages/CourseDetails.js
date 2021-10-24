@@ -10,12 +10,12 @@ import ActionsBar from '../components/ActionsBar';
 
 const CourseDetails = () => {
   const { id } = useParams();
-  const { courses, coursesDispatch } = useGlobalContext();
+  const { courses, coursesDispatcher } = useGlobalContext();
 
   // Only run on page load to prevent infinite loop
   useEffect(() => {
-    getCourseById(coursesDispatch, id);
-  }, [coursesDispatch, id]);
+    getCourseById(coursesDispatcher, id);
+  }, [coursesDispatcher, id]);
 
   // Destructure state and return null if no value exists
   const { title, description, estimatedTime, materialsNeeded } = courses.byId || null;

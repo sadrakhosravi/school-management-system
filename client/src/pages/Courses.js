@@ -9,11 +9,11 @@ import getAllCourses from '../context/actions/courses/getAllCourses';
 import { useGlobalContext } from '../context/Provider';
 
 const Courses = () => {
-  const { courses, coursesDispatch } = useGlobalContext();
+  const { courses, coursesDispatcher } = useGlobalContext();
 
   useEffect(() => {
-    getAllCourses(coursesDispatch);
-  }, [coursesDispatch]);
+    getAllCourses(coursesDispatcher);
+  }, [coursesDispatcher]);
 
   return (
     <div className="wrap main--grid">

@@ -9,13 +9,13 @@ import getCourseById from '../context/actions/courses/getCourseById';
 
 const UpdateCourse = () => {
   const { id } = useParams();
-  const { courses, coursesDispatch } = useGlobalContext();
+  const { courses, coursesDispatcher } = useGlobalContext();
 
   // Request once to prevent infinite loop
   useEffect(() => {
     // If the course data is not already available in the state, request it
     if (Object.keys(courses.byId).length === 0) {
-      getCourseById(coursesDispatch, id);
+      getCourseById(coursesDispatcher, id);
     }
   }, []);
 

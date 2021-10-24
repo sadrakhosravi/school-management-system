@@ -1,7 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useGlobalContext } from '../context/Provider';
 
 const Header = () => {
+  const { user } = useGlobalContext();
+  console.log(user);
+
   return (
     <header>
       <div className="wrap header--flex">
@@ -11,10 +15,12 @@ const Header = () => {
         <nav>
           <ul className="header--signedout">
             <li>
-              <Link to="/sign-up">Sign Up</Link>
+              {user.firstName && `Welcome, ${user.firstName} ${user.lastName}`}
+              {!user.firstName && <Link to="/sign-up">Sign Up</Link>}
             </li>
             <li>
-              <Link to="/sign-in">Sign In</Link>
+              {user.firstName && <Link to="/sign-out">Sign Out</Link>}
+              {!user.firstName && <Link to="/sign-in">Sign In</Link>}
             </li>
           </ul>
         </nav>

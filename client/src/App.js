@@ -11,7 +11,7 @@ import './styles/reset.css';
 import './styles/global.css';
 
 // Constants
-import { COURSES, COURSE_DETAILS, COURSE_NEW, COURSE_UPDATE } from './utils/constants/Routes';
+import { COURSE_DETAILS, COURSE_NEW, COURSE_UPDATE } from './utils/constants/Routes';
 
 // Components
 import Header from './components/Header';
@@ -19,10 +19,11 @@ import Header from './components/Header';
 // Pages
 import Courses from './pages/Courses';
 import CourseDetails from './pages/CourseDetails';
-import UserSignIn from './pages/UserSignIn';
-import UserSignUp from './pages/UserSignUp';
 import CreateCourse from './pages/CreateCourse';
 import UpdateCourse from './pages/UpdateCourse';
+import UserSignIn from './pages/UserSignIn';
+import UserSignUp from './pages/UserSignUp';
+import UserSignOut from './pages/UserSignOut';
 
 const App = () => {
   return (
@@ -37,6 +38,7 @@ const App = () => {
             <Route exact path={COURSE_DETAILS} component={CourseDetails} />
             <Route exact path="/sign-in" component={UserSignIn} />
             <Route exact path="/sign-up" component={UserSignUp} />
+            <Route exact path="/sign-out" component={UserSignOut} />
           </Switch>
         </main>
       </Router>

@@ -1,6 +1,6 @@
 import { COURSES_ACTIONS } from '../../utils/constants/ActionTypes';
 
-const courses = (state, action) => {
+const coursesReducer = (state, action) => {
   switch (action.type) {
     default:
       return { ...state };
@@ -16,4 +16,4 @@ const courses = (state, action) => {
   }
 };
 
-export default courses;
+export default coursesReducer;
