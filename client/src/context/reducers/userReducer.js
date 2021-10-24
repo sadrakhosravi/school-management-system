@@ -11,9 +11,10 @@ const userReducer = (state, action) => {
 
     case USER_ACTIONS.SIGN_IN_SUCCESS:
       // Destructure payload object on reducer call
-      const { firstName, lastName, emailAddress, password } = action.payload;
+      const { id, firstName, lastName, emailAddress, password } = action.payload;
       return {
         ...state,
+        id,
         firstName,
         lastName,
         emailAddress,

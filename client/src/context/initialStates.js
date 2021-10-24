@@ -8,6 +8,7 @@ export const coursesInitialState = {
 
 // User initial state
 export const userInitialState = {
+  id: null,
   firstName: '',
   lastName: '',
   emailAddress: '',

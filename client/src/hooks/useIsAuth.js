@@ -11,7 +11,7 @@ const useIsAuth = () => {
 
   // Only check on user state change
   useEffect(() => {
-    if (user.emailAddress && user.password) {
+    if (user.id) {
       setIsAuth(true);
     } else {
       setIsAuth(false);
