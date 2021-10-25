@@ -1,5 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+
+// Components
+import ValidationError from '../components/ValidationError';
 
 // Context
 import { useGlobalContext } from '../context/Provider';
@@ -8,38 +11,43 @@ import { useGlobalContext } from '../context/Provider';
 import signIn from '../context/actions/user/sign-in';
 
 const UserSignIn = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const { userDispatcher, user } = useGlobalContext();
+  const [formInputData, setFormInputData] = useState({});
+  const [error, setError] = useState(false);
+  const { userDispatcher } = useGlobalContext();
   const history = useHistory();
 
-  const handleSubmit = async e => {
-    e.preventDefault();
+  const handleInputChange = event => {
+    const { name, value } = event.target;
+    // Use input names and dynamically assign a state name and value.
+    setFormInputData(prevState => {
+      return { ...prevState, [name]: value };
+    });
+  };
 
+  // Handles sign-in form submission.
+  const handleFormSubmit = async event => {
+    event.preventDefault();
     const data = {
-      username,
-      password,
+      username: formInputData.emailAddress,
+      password: formInputData.password,
     };
+
+    // Send the data to the api and await response.
     const isSignedIn = await signIn(userDispatcher, data);
 
-    // If the api validates the credential, navigate to the home page
-    isSignedIn && history.push('/');
+    // If sign-in was successful, redirect to the courses page, else display an error message.
+    isSignedIn === true ? history.push('/') : setError(isSignedIn.error);
   };
 
   return (
     <div className="form--centered">
       <h2>Sign In</h2>
-
-      <form onSubmit={handleSubmit}>
+      {error && <ValidationError message={error.message} />}
+      <form onSubmit={handleFormSubmit}>
         <label htmlFor="emailAddress">Email Address</label>
-        <input
-          id="emailAddress"
-          name="emailAddress"
-          type="email"
-          onChange={e => setUsername(e.target.value)}
-        />
+        <input id="emailAddress" name="emailAddress" type="email" onChange={handleInputChange} />
         <label htmlFor="password">Password</label>
-        <input id="password" name="password" type="password" onChange={e => setPassword(e.target.value)} />
+        <input id="password" name="password" type="password" onChange={handleInputChange} />
         <button className="button" type="submit">
           Sign In
         </button>

@@ -17,7 +17,7 @@ const UpdateCourse = () => {
     if (Object.keys(courses.byId).length === 0) {
       getCourseById(coursesDispatcher, id);
     }
-  }, []);
+  }, [courses, coursesDispatcher, id]);
 
   // Destructure state and return null if no value exists.
   const { title, description, estimatedTime, materialsNeeded } = courses.byId || null;

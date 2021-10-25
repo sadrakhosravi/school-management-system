@@ -22,7 +22,7 @@ const userReducer = (state, action) => {
       };
 
     case USER_ACTIONS.SIGN_OUT:
-      return { userInitialState };
+      return { ...userInitialState };
   }
 };
 
