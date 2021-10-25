@@ -23,8 +23,6 @@ const CreateCourse = () => {
     });
   };
 
-  console.log(formInputData);
-
   const handleFormSubmit = async event => {
     event.preventDefault();
 
@@ -34,7 +32,6 @@ const CreateCourse = () => {
       password: user.password,
     };
     const response = await createCourse(currentUser, { ...formInputData, userId: user.id });
-    console.log(response);
 
     // Handle API response
     response === true ? history.push('/') : setError(response.error);
