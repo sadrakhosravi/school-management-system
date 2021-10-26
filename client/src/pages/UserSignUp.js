@@ -41,6 +41,8 @@ const UserSignUp = () => {
     isSignedUp === true ? history.push('/') : setError(isSignedUp.error);
   };
 
+  console.log(error);
+
   return (
     <div className="form--centered">
       <h2>Sign Up</h2>

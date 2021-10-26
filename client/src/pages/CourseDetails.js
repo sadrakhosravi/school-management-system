@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import ReactMarkdowwn from 'react-markdown';
 import { useParams } from 'react-router-dom';
 
 // Context
@@ -21,6 +22,7 @@ const CourseDetails = () => {
   const { title, description, estimatedTime, materialsNeeded } = courses.byId || null;
   const firstName = courses.byId.User?.firstName;
   const lastName = courses.byId.User?.lastName;
+
   return (
     <>
       <ActionsBar />
@@ -35,7 +37,9 @@ const CourseDetails = () => {
                 <p>
                   By {firstName} {lastName}
                 </p>
-                <p>{description}</p>
+                <p>
+                  <ReactMarkdowwn>{description}</ReactMarkdowwn>
+                </p>
               </div>
               <div>
                 <h3 className="course--detail--title">Estimated Time</h3>
@@ -43,8 +47,7 @@ const CourseDetails = () => {
 
                 <h3 className="course--detail--title">Materials Needed</h3>
                 <ul className="course--detail--list">
-                  {materialsNeeded &&
-                    materialsNeeded.split('*').map((material, i) => i !== 0 && <li key={i}>{material}</li>)}
+                  <ReactMarkdowwn>{materialsNeeded}</ReactMarkdowwn>
                 </ul>
               </div>
             </div>
