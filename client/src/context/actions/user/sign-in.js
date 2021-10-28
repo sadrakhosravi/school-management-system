@@ -26,6 +26,11 @@ const signIn = asyncHandler(async (dispatch, userCredentials) => {
     type: USER_ACTIONS.SIGN_IN_SUCCESS,
     payload: response.data,
   });
+
+  // Add user credentials to the session storage
+  window.localStorage.setItem('username', userCredentials.username);
+  window.localStorage.setItem('password', userCredentials.password);
+
   return true;
 });
 

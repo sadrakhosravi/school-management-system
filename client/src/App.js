@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 // Router
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
@@ -26,8 +26,10 @@ import UserSignIn from './pages/UserSignIn';
 import UserSignUp from './pages/UserSignUp';
 import UserSignOut from './pages/UserSignOut';
 import NotFound from './pages/NotFound';
+import useCheckLocalStorage from './hooks/useCheckLocalStorage';
 
 const App = () => {
+  useCheckLocalStorage();
   const isAuth = useIsAuth();
   return (
     <Router>
