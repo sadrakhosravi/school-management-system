@@ -36,7 +36,7 @@ const UserSignIn = () => {
     const isSignedIn = await signIn(userDispatcher, userCredentials);
 
     // If sign-in was successful, redirect to the courses page, else display an error message.
-    isSignedIn === true ? history.push('/') : setError(isSignedIn.error);
+    isSignedIn === true ? history.goBack() : setError(isSignedIn.error);
   };
 
   return (

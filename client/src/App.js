@@ -1,7 +1,7 @@
 import React from 'react';
 
 // Router
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 
 // Hooks
 import useIsAuth from './hooks/useIsAuth';
@@ -42,7 +42,8 @@ const App = () => {
           <Route exact path="/sign-in" component={UserSignIn} />
           <Route exact path="/sign-up" component={UserSignUp} />
           <Route exact path="/sign-out" component={UserSignOut} />
-          <Route component={NotFound} />
+          <Route exact path="/not-found" component={NotFound} />
+          <Route render={() => <Redirect to="/not-found" />} />
         </Switch>
       </main>
     </Router>
