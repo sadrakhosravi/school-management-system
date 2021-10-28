@@ -25,6 +25,7 @@ import UpdateCourse from './pages/UpdateCourse';
 import UserSignIn from './pages/UserSignIn';
 import UserSignUp from './pages/UserSignUp';
 import UserSignOut from './pages/UserSignOut';
+import NotFound from './pages/NotFound';
 
 const App = () => {
   const isAuth = useIsAuth();
@@ -41,6 +42,7 @@ const App = () => {
           <Route exact path="/sign-in" component={UserSignIn} />
           <Route exact path="/sign-up" component={UserSignUp} />
           <Route exact path="/sign-out" component={UserSignOut} />
+          <Route component={NotFound} />
         </Switch>
       </main>
     </Router>
