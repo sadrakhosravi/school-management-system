@@ -37,9 +37,7 @@ const CourseDetails = () => {
                 <p>
                   By {firstName} {lastName}
                 </p>
-                <p>
-                  <ReactMarkdowwn>{description}</ReactMarkdowwn>
-                </p>
+                <ReactMarkdowwn>{description}</ReactMarkdowwn>
               </div>
               <div>
                 <h3 className="course--detail--title">Estimated Time</h3>

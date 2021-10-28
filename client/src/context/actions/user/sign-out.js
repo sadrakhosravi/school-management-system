@@ -1,7 +1,7 @@
 // Constants
 import { USER_ACTIONS } from '../../../utils/constants/ActionTypes';
 
-const signOut = async (dispatch, data) => {
+const signOut = async dispatch => {
   dispatch({ type: USER_ACTIONS.SIGN_OUT });
 };
 

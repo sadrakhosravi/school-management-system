@@ -38,7 +38,7 @@ const UserSignUp = () => {
     const isSignedUp = await signUp(userDispatcher, data);
 
     // If signup was successful, redirect to the courses page, else display an error message.
-    isSignedUp === true ? history.push('/') : setError(isSignedUp.error);
+    isSignedUp === true ? history.push('/sign-in') : setError(isSignedUp.error);
   };
 
   console.log(error);

@@ -14,7 +14,7 @@ import { COURSES } from '../utils/constants/Routes';
 import deleteCourse from '../context/actions/courses/deleteCourse';
 
 const ActionsBar = () => {
-  const { id } = useParams();
+  const { id: courseId } = useParams();
   const isAuth = useIsAuth();
   const { user, courses } = useGlobalContext();
   const history = useHistory();
@@ -24,9 +24,10 @@ const ActionsBar = () => {
       username: user.emailAddress,
       password: user.password,
     };
-    const response = await deleteCourse(currentUser, id);
+    const response = await deleteCourse(courseId, currentUser);
+    console.log(response);
 
-    response === true ? history.push('/') : console.log(response);
+    response === true && history.push('/');
   };
 
   return (
@@ -34,7 +35,7 @@ const ActionsBar = () => {
       <div className="wrap">
         {isAuth && courses.byId.userId === user.id && (
           <>
-            <Link className="button" to={`${COURSES}/${id}/update`}>
+            <Link className="button" to={`${COURSES}/${courseId}/update`}>
               Update Course
             </Link>
             <button className="button" onClick={handleDeleteClick}>
