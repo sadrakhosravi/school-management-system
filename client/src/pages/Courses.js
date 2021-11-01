@@ -1,25 +1,32 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 // Constants
+import { API_COURSES_BASE_URL } from '../utils/constants/API';
 import { COURSE_NEW, COURSES } from '../utils/constants/Routes';
 
-// Context
-import getAllCourses from '../context/actions/courses/getAllCourses';
-import { useGlobalContext } from '../context/Provider';
-
 const Courses = () => {
-  const { courses, coursesDispatcher } = useGlobalContext();
+  const [courses, setCourses] = useState({});
+  const [isLoading, setIsloading] = useState(true);
 
   useEffect(() => {
-    getAllCourses(coursesDispatcher);
-  }, [coursesDispatcher]);
+    (async () => {
+      try {
+        const response = await axios.get(API_COURSES_BASE_URL);
+        setCourses(response.data);
+        setIsloading(false);
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+  }, []);
 
   return (
     <div className="wrap main--grid">
-      {courses.isLoading && <p>Fetching data ...</p>}
-      {!courses.isLoading &&
-        courses.allCourses.map(course => (
+      {isLoading && <p>Fetching data ...</p>}
+      {!isLoading &&
+        courses.map(course => (
           <Link className="course--module course--link" to={`${COURSES}/${course.id}`} key={course.id}>
             <h2 className="course--label">Course</h2>
             <h3 className="course--title">{course.title}</h3>
