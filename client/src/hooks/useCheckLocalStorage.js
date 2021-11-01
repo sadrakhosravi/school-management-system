@@ -17,6 +17,8 @@ const useCheckLocalStorage = () => {
   // Only run once on page load
   useEffect(() => {
     checkUserStorage();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 };
 export default useCheckLocalStorage;

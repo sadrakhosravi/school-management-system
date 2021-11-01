@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams, useHistory } from 'react-router-dom';
 
+// Components
+import ValidationError from '../components/ValidationError';
+
 // Context
 import { useGlobalContext } from '../context/Provider';
 
@@ -10,6 +13,8 @@ import updateCourse from '../context/actions/courses/updateCourse';
 
 const UpdateCourse = () => {
   const [formInputData, setFormInputData] = useState({});
+  const [error, setError] = useState(false);
+
   const { id } = useParams();
   const { courses, user, coursesDispatcher } = useGlobalContext();
   const history = useHistory();
@@ -50,12 +55,15 @@ const UpdateCourse = () => {
     };
 
     const response = await updateCourse(currentUser, id, { ...formInputData, userId: user.id });
-    response === true ? history.push(`/courses/${id}`) : console.log(response.error);
+    response === true ? history.push(`/courses/${id}`) : setError(response.error);
   };
+
+  console.log(error);
 
   return (
     <div className="wrap">
       <h2>Update Course</h2>
+      {error && <ValidationError messages={error.message} />}
       <form onSubmit={handleFormSubmit}>
         <div className="main--flex">
           <div>
