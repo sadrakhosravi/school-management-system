@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
 // Components
+import ValidationError from '../components/ValidationError';
 
 // Context
 import { useGlobalContext } from '../context/Provider';
 
 // Actions
 import signUp from '../context/actions/user/sign-up';
-import ValidationError from '../components/ValidationError';
+import signIn from '../context/actions/user/sign-in';
 
 const UserSignUp = () => {
   const [error, setError] = useState(false);
@@ -38,10 +39,13 @@ const UserSignUp = () => {
     const isSignedUp = await signUp(userDispatcher, data);
 
     // If signup was successful, redirect to the courses page, else display an error message.
-    isSignedUp === true ? history.push('/sign-in') : setError(isSignedUp.error);
+    if (isSignedUp === true) {
+      await signIn(userDispatcher, { username: data.emailAddress, password: data.password });
+      history.push('/');
+    } else {
+      setError(isSignedUp.error);
+    }
   };
-
-  console.log(error);
 
   return (
     <div className="form--centered">
